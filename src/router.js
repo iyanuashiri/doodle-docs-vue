@@ -28,7 +28,7 @@ export default new Router({
       component: DocList
     },
     {
-      path: '/doc/detail/:id',
+      path: '/doc/:id',
       name: 'doc-detail',
       component: DocDetail
     },
