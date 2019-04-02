@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import DocList from '@/components/DocList'
 import DocDetail from '@/components/DocDetail'
 import DocCreate from '@/components/DocCreate'
+import DocUpdate from '@/components/DocUpdate'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/doc/create',
       name: 'doc-create',
       component: DocCreate
+    },
+    {
+      path: '/doc/update/:id',
+      name: 'doc-update',
+      component: DocUpdate
     }
   ]
 })
