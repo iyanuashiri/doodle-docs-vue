@@ -2,12 +2,13 @@
   <div id="doc-detail">
     <Navbar></Navbar>
     <h1>{{ page_title }}</h1>
-    <div>
+    <div class="card">
+
         <article>
-          <h2>{{ doc.title }}</h2>
-          <p>{{ doc.body }}</p>
+          <h2 class="card-title">{{ doc.title }}</h2>
+          <p class="card-body">{{ doc.body }}</p>
         </article>
-        <a href="#" v-on:click.prevent="populatePostToEdit(doc)">Edit Doc</a>
+      <router-link :to="{ name: 'doc-update', params: {id: doc.id}}">Edit Doc</router-link>
         <a href="#" v-on:click.prevent="deleteThisDoc(doc.id)">Delete Doc</a>
     </div>
 
@@ -26,26 +27,24 @@ export default {
   data () {
     return {
       page_title: 'Detail',
-      doc: {},
-      model: {}
+      doc: {}
+      // model: {}
     }
   },
   methods: {
     getThisDoc: async function () {
       this.doc = await api.getDoc(this.$route.params.id)
     },
-    deleteThisDoc: function (id) {
+    deleteThisDoc: async function (id) {
       if (confirm('Are you sure you want to delete this doc?')) {
-        if (this.model.id === id) {
-          this.model = {}
+        if (this.doc.id === id) {
+          // this.model = {}
         }
         api.deleteDoc(this.$route.params.id)
+        await this.$router.push({ name: 'doc-list' })
+        alert('Document has been deleted successfully')
       }
-    },
-    populatePostToEdit: function (doc) {
-      this.model = Object.assign({}, doc)
     }
-
   },
   async mounted () {
     this.getThisDoc()
