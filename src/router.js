@@ -29,14 +29,14 @@ export default new Router({
       component: DocList
     },
     {
-      path: '/doc/:id',
-      name: 'doc-detail',
-      component: DocDetail
-    },
-    {
       path: '/doc/create',
       name: 'doc-create',
       component: DocCreate
+    },
+    {
+      path: '/doc/detail/:id',
+      name: 'doc-detail',
+      component: DocDetail
     },
     {
       path: '/doc/update/:id',
