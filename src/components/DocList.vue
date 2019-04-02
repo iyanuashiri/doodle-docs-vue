@@ -4,12 +4,14 @@
       <h1>{{ page_title }}</h1>
 
       <div v-for="doc in docs.results" :key="doc.id">
-        <router-link :to="{name : 'doc-detail', params: {id: doc.id} }" >
-          <article>
-            <h2>{{ doc.title }}</h2>
-          </article>
-        </router-link>
-
+        <div class="card w-75 mx-auto border-info">
+          <div class="card-body">
+            <div>
+              <h2><router-link :to="{name: 'doc-detail', params: {id: doc.id}}">{{ doc.title}}</router-link></h2>
+              <p>{{ doc.body | truncate(20) }}</p>
+            </div>
+          </div>
+        </div>
       </div>
   </div>
 </template>
@@ -32,6 +34,15 @@ export default {
     getDocs: async function () {
       this.docs = await api.getDocs()
     }
+  },
+  filters: {
+    truncate: function (value, length) {
+      length = length || 15
+      if (!value || typeof value !== 'string') return ''
+      if (value.length <= length) return value
+      return value.substring(0, length) + '...'
+    }
+
   },
   async mounted () {
     this.getDocs()
