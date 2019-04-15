@@ -8,9 +8,9 @@
         <label for="title">Title</label>
         <input type="text" name="title" id="title" v-model="model.title" required>
       </div>
-      <div class="form-example">
+      <div class="w-auto p-3">
         <label for="body">Body</label>
-        <input type="text" name="body" id="body" v-model="model.body" required>
+        <vue-ckeditor type="classic" v-model="model.body" :editors="editors" name="body" id="body"></vue-ckeditor>
       </div>
       <div class="form-example">
         <button type="submit">Save Doc</button>
@@ -20,18 +20,24 @@
 </template>
 
 <script>
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import VueCkeditor from 'vue-ckeditor5'
 import api from '@/api'
 import Navbar from '@/components/NavBar.vue'
 
 export default {
   name: 'doc-update',
   components: {
-    Navbar
+    Navbar,
+    'vue-ckeditor': VueCkeditor.component
   },
   data () {
     return {
       page_title: 'Update Doc',
-      model: {}
+      model: {},
+      editors: {
+        classic: ClassicEditor
+      }
     }
   },
   methods: {
