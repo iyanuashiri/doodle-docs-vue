@@ -6,13 +6,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="#">Features</a>
-        <a class="nav-item nav-link" href="#">Pricing</a>
-        <a class="nav-item nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        <router-link :to="{name: 'doc-list'}" class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></router-link>
+        <a class="nav-item nav-link" href="#">Shared Docs</a>
       </div>
     </div>
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+    <button v-on:click="signOut" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
   </nav>
 
 </template>
@@ -21,8 +19,17 @@
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import axios from 'axios'
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+  methods: {
+    signOut: async function () {
+      let url = 'http://127.0.0.1:8000/api/auth/token/destroy/'
+      await axios.post(url)
+      localStorage.removeItem('authToken')
+      alert('You have logged out successfully')
+    }
+  }
 }
 </script>
 
