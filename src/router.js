@@ -5,10 +5,13 @@ import DocList from '@/components/DocList'
 import DocDetail from '@/components/DocDetail'
 import DocCreate from '@/components/DocCreate'
 import DocUpdate from '@/components/DocUpdate'
+import SignIn from '@/components/Signin'
+import SignUp from '@/components/Signup'
+import DocSharedList from '@/components/DocSharedList'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -42,6 +45,31 @@ export default new Router({
       path: '/doc/update/:id',
       name: 'doc-update',
       component: DocUpdate
+    },
+    {
+      path: '/signin',
+      name: 'sign-in',
+      component: SignIn
+    },
+    {
+      path: '/signup',
+      name: 'sign-up',
+      component: SignUp
+    },
+    {
+      path: '/shared_docs',
+      name: 'shared-docs',
+      component: DocSharedList
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('authToken') !== null || to.path === '/signin') {
+    next()
+  } else {
+    next('/signup')
+  }
+})
+
+export default router

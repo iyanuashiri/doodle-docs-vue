@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <router-link :to="{name: 'doc-list'}" class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></router-link>
-        <a class="nav-item nav-link" href="#">Shared Docs</a>
+        <router-link :to="{name: 'shared-docs'}" class="nav-item nav-link" href="#">Shared Docs</router-link>
       </div>
     </div>
     <button v-on:click="signOut" class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
