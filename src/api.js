@@ -1,4 +1,3 @@
-// import Vue from 'vue'
 import axios from 'axios'
 
 const client = axios.create({
@@ -8,14 +7,14 @@ const client = axios.create({
 
 export default {
   async execute (method, resource, data) {
-    // let accessToken = await Vue.prototype.$auth.getAccessToken()
+    let accessToken = await localStorage.getItem('authToken')
     return client({
       method,
       url: resource,
-      data
-      // headers: {
-      //   Authorization: `Bearer ${accessToken}`
-      // }
+      data,
+      headers: {
+        Authorization: `Token ${accessToken}`
+      }
     }).then(req => {
       return req.data
     })
@@ -34,6 +33,9 @@ export default {
   },
   deleteDoc (id) {
     return this.execute('delete', `/${id}`)
+  },
+  getsharedDocs () {
+    return this.execute('get', `/shared_docs/`)
   }
 
 }

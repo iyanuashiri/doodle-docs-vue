@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     getDocs: async function () {
-      this.docs = await api.sharedDocs()
+      this.docs = await api.getsharedDocs()
     }
   },
   filters: {
