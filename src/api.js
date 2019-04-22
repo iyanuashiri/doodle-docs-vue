@@ -20,22 +20,31 @@ export default {
     })
   },
   getDocs () {
-    return this.execute('get', '/')
+    return this.execute('get', '/docs')
   },
   getDoc (id) {
-    return this.execute('get', `/${id}`)
+    return this.execute('get', `/docs/${id}`)
   },
   createDoc (data) {
-    return this.execute('post', '/', data)
+    return this.execute('post', '/docs/', data)
   },
   updateDoc (id, data) {
-    return this.execute('put', `/${id}/`, data)
+    return this.execute('put', `/docs/${id}/`, data)
   },
   deleteDoc (id) {
-    return this.execute('delete', `/${id}`)
+    return this.execute('delete', `/docs/${id}`)
   },
   getsharedDocs () {
-    return this.execute('get', `/shared_docs/`)
+    return this.execute('get', `/v2/shared_docs/`)
+  },
+  shareDoc (docId, userId) {
+    return this.execute('put', `/${userId}/share/${docId}/`)
+  },
+  unshareDoc (docId, userId) {
+    return this.execute('put', `/${userId}/remove/${docId}/`)
+  },
+  getUsers () {
+    return this.execute('get', `/accounts`)
   }
 
 }
