@@ -9,13 +9,9 @@
           <label for="title">Title</label>
           <input class="w-100 p-3" type="text" name="title" id="title" v-model="model.title" required>
         </div>
-        <!--<div class="w-auto p-3">-->
-          <!--<label for="body">Body</label>-->
-          <!--<input class="w-100 p-3" type="text" name="body" id="body" v-model="model.body" required>-->
-        <!--</div>-->
         <div class="w-auto p-3">
           <label for="body">Body</label>
-          <vue-ckeditor type="classic" v-model="model.body" :editors="editors" name="body" id="body"></vue-ckeditor>
+          <editor v-model="model.body" name="body" id="body"></editor>
         </div>
         <div class="w-auto p-3">
           <button class="mx-auto btn btn-primary btn active w-25" type="submit">Save Doc</button>
@@ -26,8 +22,7 @@
 </template>
 
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import VueCkeditor from 'vue-ckeditor5'
+import Editor from '@tinymce/tinymce-vue'
 import api from '@/api'
 import Navbar from '@/components/NavBar.vue'
 
@@ -35,15 +30,12 @@ export default {
   name: 'doc-create',
   components: {
     Navbar,
-    'vue-ckeditor': VueCkeditor.component
+    'editor': Editor
   },
   data () {
     return {
       page_title: 'Create Doc',
-      model: {},
-      editors: {
-        classic: ClassicEditor
-      }
+      model: {}
     }
   },
   methods: {
